@@ -1,6 +1,8 @@
+import sys
+sys.path.append('../helpers')
+
 import unittest
 import helpers
-
 help = helpers.Helpers()
 
 class TestHelperFunctions(unittest.TestCase):
@@ -12,8 +14,8 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertRaises(ValueError, help.is_prime, -1)
 
     def test_correctness_of_isprime(self):
-        assert help.is_prime(3) == True
-        assert help.is_prime(4) == False
+        self.assertEqual(help.is_prime(3), True)
+        self.assertEqual(help.is_prime(4), False)
 
 if __name__ == '__main__':
     unittest.main()
