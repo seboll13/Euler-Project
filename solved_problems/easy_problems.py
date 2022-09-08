@@ -9,6 +9,8 @@ from functools import reduce
 
 help = helpers.Helpers()
 
+NB_ITERATIONS = 1_000_000
+
 # Timer decorator
 def timer(func):
     def f(*args, **kwargs):
@@ -29,11 +31,7 @@ class EasyProblems:
     # PROBLEM 1
     @timer
     def sum_of_multiples_of_three_and_five(self, n):
-        s = 0
-        for i in range(n):
-            if i%3 == 0 or i%5 == 0:
-                s += i
-        return s
+        return sum((_ for _ in range(n) if _%3 == 0 or _%5 == 0))
 
 
     # PROBLEM 2
@@ -77,14 +75,11 @@ class EasyProblems:
     # PROBLEM 6
     @timer
     def sum_square_difference(self, n):
-        s, sum_squares = 0, 0
-        for i in range(1, n+1):
-            sum_squares += i**2
-            s += i
-        return abs(sum_squares - s ** 2)
+        r = range(1, n+1)
+        return abs(sum(_ ** 2 for _ in r) -  sum(r)**2)
     
     
-    # PROBLEM 7
+    # PROBLEM 7 - TODO: work on niceness
     @timer
     def get_prime(self, idx: int) -> int:
         assert(idx > 0)
@@ -105,7 +100,7 @@ class EasyProblems:
         for i in range(0, len(num)-num_digits):
             prods.append(prod(int(num[i+j]) for j in range(num_digits)))
         return max(prods)
-
+    
 
     # PROBLEM 9
     @timer
@@ -122,9 +117,8 @@ class EasyProblems:
     def sum_primes_below(self, upper_bound) -> int:
         primes = (_ for _ in range(3, upper_bound, 2) if help.is_prime(_))
         return 2 + reduce(lambda x,y: x+y, primes) # works as fast using the sum() function
-    
-    
+
 
 if __name__ == '__main__':
     ep = EasyProblems()
-    print(ep.sum_primes_below(2_000_000))
+    print(ep.sum_square_difference(NB_ITERATIONS))
