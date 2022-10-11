@@ -118,7 +118,7 @@ class EasyProblems:
         """Find the product of the pythagorean triplet where a+b+c=1000"""
         gen = ((a,b,c) for a in range(1000) for b in range(1000) for c in range(1000) if a < b and b < c and a+b+c == 1000)
         for a,b,c in gen:
-            if help.is_pythagorean_triplet(a,b,c):
+            if help.is_pythagorean_triple(a,b,c):
                 return a*b*c
         return -1
     
@@ -162,11 +162,12 @@ class EasyProblems:
         for tn in help.get_triangular_numbers(n):
             if help.get_number_of_factors(tn) > 500:
                 return tn
-    
-    
+        return -1
+
+
     # PROBLEM 13
     @timer
-    def large_sum(self) -> int:
+    def large_sum(self) -> str:
         """Sums the first 10 digits of the sum of the numbers in the file"""
         return str(sum(help.read_large_numbers()))[:10]
 

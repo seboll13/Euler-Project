@@ -6,6 +6,7 @@ import helpers
 help = helpers.Helpers()
 
 class TestHelperFunctions(unittest.TestCase):
+    """Test cases for the helper functions"""
 
     # IS_PRIME
     def test_input_validity_of_isprime(self):
@@ -17,6 +18,18 @@ class TestHelperFunctions(unittest.TestCase):
     def test_correctness_of_isprime(self):
         self.assertEqual(help.is_prime(3), True)
         self.assertEqual(help.is_prime(4), False)
+    
+
+    # IS PYTHAGOREAN TRIPLE
+    def test_input_validity_of_is_pythagorean_triple(self):
+        self.assertRaises(TypeError, help.is_pythagorean_triple, 'a', 'a', 'a')
+    
+    def test_pythagorean_triple_params_are_increasing(self):
+        self.assertRaises(AssertionError, help.is_pythagorean_triple, 3, 2, 1)
+    
+    def test_correctness_of_is_pythagorean_triple(self):
+        self.assertEqual(help.is_pythagorean_triple(3, 4, 5), True)
+        self.assertEqual(help.is_pythagorean_triple(3, 4, 6), False)
     
     # GCD
     def test_input_validity_of_gcd(self):

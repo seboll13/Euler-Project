@@ -19,12 +19,14 @@ class Helpers:
         return True
     
 
-    def is_pythagorean_triplet(self, a, b, c) -> bool:
+    def is_pythagorean_triple(self, a, b, c) -> bool:
         """Returns whether or not a given triplet of numbers is pythagorean, i.e. if a^2+b^2=c^2
         @param a,b,c is the proposed triplet"""
         if not isinstance(a, int) or not isinstance(b, int) or not isinstance(c, int):
             raise TypeError('Parameters must be integers.')
         assert(a < b < c)
+        # if b < a or c < b:
+        #     raise ValueError('Parameters must be strictly increasing')
         return a**2 + b**2 == c**2
     
     
@@ -47,12 +49,12 @@ class Helpers:
             raise TypeError('Parameters must be integers.')
         if a < 0 or b < 0:
             raise ValueError('Parameters cannot be negative.')
-        return (a * b) / self.gcd(a, b)
+        return int((a * b) / self.gcd(a, b))
     
 
     def read_grid(self) -> list:
         """Reads the grid file and returns a list of lists of integers"""
-        with open('../files/grid11.txt', 'r') as f:
+        with open('../files/grid11.txt', 'r', encoding='UTF-8') as f:
             return [[int(num) for num in line.split(' ')] for line in f.readlines()]
     
 
@@ -71,7 +73,7 @@ class Helpers:
         return num_factors
 
 
-    def get_triangular_numbers(self, n):
+    def get_triangular_numbers(self, n) -> Generator[int, None, None]:
         """Generates the first n triangular numbers"""
         if not isinstance(n, int):
             raise TypeError('Parameter must be an integer.')
@@ -80,9 +82,9 @@ class Helpers:
         return (n*(n+1)//2 for n in range(1, n+1))
     
 
-    def read_large_numbers(self):
+    def read_large_numbers(self) -> Generator:
         """Reads the large numbers file and returns a list of integers"""
-        with open('../files/largenums13.txt', 'r') as f:
+        with open('../files/largenums13.txt', 'r', encoding='UTF-8') as f:
             return (int(line) for line in f.readlines())
     
 
@@ -95,7 +97,7 @@ class Helpers:
         return self.generate_collatz_sequence(3*n + 1, cnt+1)
     
 
-    def factorial(self, n):
+    def factorial(self, n) -> int:
         """Returns the factorial of a given number n"""
         if not isinstance(n, int):
             raise TypeError('Parameter must be an integer.')
@@ -107,10 +109,12 @@ class Helpers:
     
 
     def numbers_to_19(self) -> list:
+        """Returns a list of numbers from 0 to 19"""
         return ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
     
 
     def tens(self) -> list:
+        """Returns a list of tens"""
         return ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
     
 
